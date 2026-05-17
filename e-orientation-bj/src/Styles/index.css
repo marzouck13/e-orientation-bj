@@ -1,0 +1,1263 @@
+/* ============================================================
+   1. RESET & STRUCTURE DE BASE
+   ============================================================ */
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* État de départ : invisible et bas */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.5, 0, 0.22, 1);
+  will-change: opacity, transform;
+}
+
+/* État d'arrivée : visible et à sa place */
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   2. NAVBAR & LOGO
+   ============================================================ */
+.navbar-custom {
+    background-color:#398168e7 !important; 
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.271);
+    transition: all 0.3s ease;
+}
+
+.logo-navbar {
+    height: 85px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo-navbar:hover {
+    transform: scale(1.02);
+}
+
+/* ============================================================
+   3. ANIMATION DU MENU HAMBURGER (LE "X" PARFAIT)
+   ============================================================ */
+.custom-toggler {
+    padding: 0 !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.hamburger-icon {
+    width: 30px;
+    height: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.hamburger-icon div {
+    width: 90%;
+    height: 4px;
+    background-color: #2d3748;
+    transition: all 0.2s ease-in-out;
+    border-radius: 10px;
+    transform-origin: center;
+}
+
+.navbar-toggler:not(.collapsed) .bar1 {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.navbar-toggler:not(.collapsed) .bar2 {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+.navbar-toggler:not(.collapsed) .bar3 {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* ============================================================
+   4. NAVIGATION LINKS (STYLES ORIGINAUX)
+   ============================================================ */
+.nav-link-custom {
+    color: #2d3748 !important;
+    font-weight: 750;
+    font-size: 0.95rem;
+    letter-spacing: 1.2px;
+    position: relative;
+    padding: 0.5rem 1.2rem !important;
+    white-space: nowrap !important;
+}
+
+.nav-link-custom::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: 5px;
+    left: 15%;
+    background-color: var(--navbar-color);
+    transition: width 0.3s ease;
+}
+
+.nav-link-custom:hover::after {
+    width: 70%;
+}
+
+.nav-link-custom:hover {
+    color: var(--navbar-color) !important;
+}
+
+/* --- OPTIMISATION NAVBAR MOBILE --- */
+@media (max-width: 991px) {
+    /* Réduction de l'espacement global du menu déroulant */
+    .navbar-collapse {
+        padding-top: 10px !important;
+        padding-bottom: 15px !important;
+    }
+
+    /* Ajustement des liens pour occuper moins de hauteur */
+    .nav-link-custom, 
+    .nav-text-adaptive {
+        padding-top: 8px !important;
+        padding-bottom: 8px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        display: block;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Séparation légère */
+    }
+
+    /* Le dernier lien n'a pas besoin de bordure */
+    .navbar-nav a:nth-last-child(2) {
+        border-bottom: none;
+    }
+
+    /* Optimisation du bouton d'action principal sur mobile */
+    .btn-espace {
+        margin-top: 10px !important;
+        padding: 10px 20px !important; /* Padding plus compact */
+        font-size: 0.9rem !important; /* Texte légèrement plus petit */
+        width: 100%; /* S'assure qu'il prend toute la largeur pour faciliter le clic */
+    }
+}
+
+/* --- STYLE GÉNÉRAL DU BOUTON (Rappel) --- */
+.btn-espace {
+    display: inline-block;
+    background-color: var(--navbar-color);
+    color: white !important;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+/* ============================================================
+   5. BOUTON "MON ESPACE"
+   ============================================================ */
+.btn-espace {
+    background-color: #20314ff8 !important;
+    color: white !important;
+    border: none !important;
+    padding: 0.7rem 2rem !important;
+    border-radius: 6px !important;
+    font-weight: 900 !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-espace:hover {
+    background-color: #1a202c !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
+}
+
+/* ============================================================
+   6. RESPONSIVE (MOBILE & TABLETTE)
+   ============================================================ */
+@media (max-width: 991.98px) {
+    .logo-navbar {
+        height: 69px;
+    }
+
+    .navbar-collapse {
+        background-color: rgba(255, 255, 255, 0.638);
+        margin-bottom: 9px;
+        margin-top: 9px;
+        padding: 9px;
+        border-radius: 10px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .nav-link-custom {
+        padding: 1rem 0 !important;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        text-align: center;
+        white-space: nowrap !important; 
+    }
+
+    .container {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+    }
+    
+    .btn-espace {
+        white-space: nowrap !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar-nav {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+    }
+}
+
+:root {
+    --hero-img-width-desktop: 500px;
+    --hero-img-width-mobile: 390px;
+    
+    --navbar-color: #1e6149d1 ;
+}
+
+.hero-image-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-img {
+    position: relative;
+    z-index: 2;
+    width: var(--hero-img-width-desktop);
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.718));
+    border-radius: 45%;
+}
+
+.hero-section{
+   padding-top: 30px;
+}
+
+@media (max-width:991.98px) {
+   .hero-section{
+    padding-top: 3px;
+  }
+}
+
+.hero-circle-bg {
+    position: absolute;
+    width: 110%;
+    aspect-ratio: 1 / 1;
+    background-color: var(--navbar-color);
+    border-radius: 50%;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -52%);
+}
+
+@media (max-width: 991.98px) {
+    .hero-img {
+        width: var(--hero-img-width-mobile);
+    }
+}
+
+/* ============================================================
+   7. SECTION STATISTIQUES (SANS ICONES - ÉPURÉ)
+   ============================================================ */
+.stats-section {
+    background-color: #ffffff;
+    padding: 80px 0;
+}
+
+.info-badge {
+    display: inline-block;
+    background-color: rgba(45, 90, 39, 0.08);
+    color: var(--navbar-color);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+.section-title {
+    font-weight: 800;
+    color: #1a202c;
+    font-size: 2.5rem;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: #647793;
+    max-width: 800px;
+    line-height: 1.6;
+}
+
+.stat-card {
+    background: #f8fafc;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-card:hover {
+    background: white;
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    border-color: var(--navbar-color);
+}
+
+.stat-number {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--navbar-color);
+    background: rgba(45, 90, 39, 0.1);
+    padding: 5px 15px;
+    border-radius: 8px;
+}
+
+.stat-label {
+    font-weight: 700;
+    color: #2d3748;
+    font-size: 1.1rem;
+}
+
+.stat-detail {
+    color: #4a5568;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.8rem;
+    }
+}
+
+.stat-icon-box {
+    color: var(--navbar-color);
+    background-color: rgba(45, 90, 39, 0.08);
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stat-number {
+    font-weight: 800;
+    color: var(--navbar-color);
+    font-size: 0.9rem;
+    background: rgba(45, 90, 39, 0.05);
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
+.text-custom-green {
+    color: var(--navbar-color) !important;
+}
+
+.image-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-etudiants {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+}
+
+.process-circle-bg {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    background: rgba(45, 90, 39, 0.05);
+    border-radius: 50%;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* ============================================================
+   8. SECTION PROCESSUS (ÉPURÉE & DISPOSITION IMAGE)
+   ============================================================ */
+.process-section {
+    position: relative;
+}
+
+.process-step-card {
+    background: #ffffff;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.03);
+    transition: transform 0.3s ease;
+}
+
+.process-step-card:hover {
+    transform: translateX(2px);
+    border-color: var(--navbar-color);
+}
+
+.step-icon-circle {
+    background: rgba(45, 90, 39, 0.08);
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.process-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+}
+
+.process-img-main {
+    position: relative;
+    z-index: 2;
+    border-radius: 30PX;
+}
+
+@media (max-width: 991.98px) {
+    .process-section .row {
+        flex-direction: column-reverse !important;
+    }
+
+    .process-content {
+        text-align: center !important;
+        margin-top: 30px;
+    }
+
+    .process-step-card {
+        flex-direction: column;
+        align-items: center !important;
+        text-align: center;
+        padding: 1.5rem !important;
+    }
+
+    .process-step-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .step-icon-circle {
+        margin-bottom: 12px;
+    }
+}
+
+.process-shape-bg {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 90%;
+    background: var(--navbar-color) !important;
+    opacity: 0.20;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    z-index: 1;
+}
+
+@media (min-width: 992px) {
+    .border-start-lg {
+        border-left: 2px solid var(--navbar-color);
+        opacity: 0.2;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .process-header-horizontal {
+        text-align: center;
+    }
+    
+    .process-header-horizontal h2 {
+        font-size: 1.5rem !important;
+    }
+}
+
+/* ============================================================
+   11. SECTION UNIVERSITÉS (ONGLETS)
+   ============================================================ */
+.uni-nav-pills .uni-link {
+    background: #f8f9fa;
+    color: #495057;
+    border-radius: 12px;
+    font-weight: 700;
+    padding: 10px 15px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    gap: 5px;
+}
+
+.uni-nav-pills .uni-link.active {
+    background-color: var(--navbar-color) !important;
+    color: white !important;
+    box-shadow: 0 10px 20px rgba(45, 90, 39, 0.2);
+}
+
+.uni-tab-content {
+    background: #ffffff;
+}
+
+.uni-icon-box {
+    width: 50px;
+    height: 50px;
+    background: rgba(45, 90, 39, 0.1);
+    color: var(--navbar-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+}
+
+.uni-placeholder-img {
+    height: 200px;
+    background: #f8f9fa;
+    border-radius: 20px;
+    border: 2px dashed #dee2e6;
+}
+
+@media (max-width: 768px) {
+    .uni-nav-pills {
+        flex-wrap: wrap;
+    }
+    .uni-link {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+}
+
+/* ============================================================
+   11. SECTION UNIVERSITÉS (EFFET FILIGRANE)
+   ============================================================ */
+.uni-tab-content {
+    background: #ffffff;
+    min-height: 380px;
+}
+
+.uni-bg-logo {
+    position: absolute;
+    right: -5%;
+    bottom: -10%;
+    height: 110%;
+    opacity: 0.19;
+    pointer-events: none;
+    z-index: 1;
+    filter: grayscale(100%);
+}
+
+.uni-nav-pills .uni-link {
+    background: #dee2e7;
+    color: #495057;
+    border-radius: 12px;
+    font-weight: 700;
+    padding: 12px 20px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.uni-nav-pills .uni-link.active {
+    background-color: var(--navbar-color) !important;
+    color: white !important;
+    box-shadow: 0 10px 20px rgba(45, 90, 39, 0.2);
+}
+
+.uni-icon-box {
+    width: 50px;
+    height: 50px;
+    background: rgba(45, 90, 39, 0.1);
+    color: var(--navbar-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+}
+
+@media (max-width: 991.98px) {
+    .uni-bg-logo {
+        height: 70%;
+        right: 0;
+        bottom: 0;
+        opacity: 0.09;
+    }
+}
+
+/* --- SECTION SIMULATEUR PREVIEW --- */
+.simulateur-preview-section {
+    background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.sim-glass-box {
+    background: #ffffff;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.075);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+}
+
+.icon-badge-sm {
+    background: rgba(45, 90, 39, 0.1);
+    color: var(--navbar-color);
+    padding: 8px;
+    border-radius: 10px;
+}
+/* Animation de vibration subtile */
+@keyframes vibrate {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+    20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+.animate-vibrate {
+    /* L'animation dure 0.8s, se répète toutes les 3 secondes pour attirer l'œil sans lasser */
+    animation: vibrate 3s cubic-bezier(.37,.07,.19,.27) both infinite;
+    animation-delay: 19s;
+}
+
+.btn-espace-lg {
+    background-color: var(--navbar-color) !important;
+    border: none !important;
+    padding: 15px 35px !important;
+    border-radius: 14px !important;
+    font-weight: 700 !important;
+    color: white !important; /* Assure la visibilité du texte */
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-espace-lg:hover {
+    animation: none !important; /* On stoppe la vibration au survol pour la précision du clic */
+    transform: translateY(-3px) scale(1.02) !important;
+    box-shadow: 0 10px 20px rgba(45, 90, 39, 0.3) !important;
+}
+
+/* --- MOCKUP VISUAL --- */
+.preview-card-mockup {
+    background: #cccfce;
+    border-radius: 15px;
+    transform: rotate(2.5deg);
+}
+
+.mockup-header {
+    display: flex;
+    gap: 6px;
+}
+
+.mockup-dot1 {
+    width: 12px;
+    height: 12px;
+    background: #098c14;
+    border-radius: 50%;
+}
+
+.mockup-dot2 {
+    width: 12px;
+    height: 12px;
+    background: #c0b40d;
+    border-radius: 50%;
+}
+
+.mockup-dot3 {
+    width: 12px;
+    height: 12px;
+    background: #ab300f;
+    border-radius: 50%;
+}
+
+.fake-input {
+    height: 40px;
+    background: white;
+    border-radius: 8px;
+}
+
+.fake-result {
+    background: white;
+    border-radius: 15px;
+    border: 2px dashed var(--navbar-color);
+}
+
+.fake-line {
+    height: 8px;
+    background: #e0e0e0;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.zouck{
+    background-color: rgba(45, 90, 39, 0.09);
+    border-radius: 25px;
+}
+
+/* --- SECTION FAQ --- */
+.faq-section {
+    padding-bottom: 80px;
+}
+
+.custom-accordion .accordion-item {
+    border-radius: 15px !important;
+    overflow: hidden;
+    background: #f8f9fa;
+}
+
+.custom-accordion .accordion-button {
+    padding: 20px;
+    font-weight: 600;
+    color: var(--navbar-color);
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 15px !important;
+}
+
+.custom-accordion .accordion-button:not(.collapsed) {
+    color: #3d7a2c;
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.custom-accordion .accordion-button::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%232d5a27'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+.custom-accordion .accordion-body {
+    background-color: #ffffff;
+    padding: 20px;
+    font-size: 0.95rem;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+
+/* --- ADAPTATION NAVBAR --- */
+
+/* Empêche les liens de passer à la ligne sur Desktop */
+@media (min-width: 992px) {
+    .navbar-collapse {
+        display: flex !important;
+        flex-basis: auto;
+    }
+    
+    .nav-text-adaptive {
+        white-space: nowrap;
+        font-size: calc(12px + 0.5vw);
+        font-weight: 600;
+        color:#ebebeb
+    }
+
+    .nav-link-custom {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+}
+
+/* Style du bouton pour qu'il ne soit pas trop massif sur les petits écrans Desktop */
+.btn-espace {
+    display: inline-block;
+    background-color: var(--navbar-color);
+    color: white;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+/* Sur mobile, on revient à une liste classique */
+@media (max-width: 991px) {
+    .nav-text-adaptive {
+        display: block;
+        padding: 10px 0;
+    }
+    .flex-row-desktop-only {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+    }
+}
+
+
+
+
+/* --- CONFIGURATION DES COULEURS --- */
+:root {
+    --primary-dark: #242929; /* Fond sombre profond */
+    --accent-green: #398168; /* Vert identitaire de E-Orientation-bj */
+    --footer-light-text: #bdc3c7;
+    --white: #ffffff;
+}
+
+/* --- FOOTER SECTION --- */
+.footer-section {
+    background-color: var(--primary-dark);
+    color: var(--footer-light-text);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--footer-light-text);
+}
+
+.footer-title {
+    color: var(--white);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 1.8rem;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-title::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 30px;
+    height: 3px;
+    background-color: var(--accent-green);
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: var(--footer-light-text);
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.footer-links a:hover {
+    color: var(--white);
+    transform: translateX(5px);
+}
+
+.footer-contact li {
+    color: var(--footer-light-text);
+    font-size: 0.92rem;
+}
+
+.social-icon-modern {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+}
+
+.social-icon-modern:hover {
+    background: var(--accent-green);
+    color: var(--white);
+    transform: scale(1.1) translateY(-3px);
+    border-color: var(--accent-green);
+}
+
+.footer-bottom {
+    background-color: rgba(0, 0, 0, 0.25);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* --- RESPONSIVE FOOTER --- */
+@media (max-width: 767px) {
+    .footer-section {
+        padding-top: 50px !important;
+        text-align: center;
+    }
+    
+    .footer-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .footer-contact li {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .footer-links a:hover {
+        transform: translateY(-2px);
+    }
+}
+
+
+/* --- CTA SECTION AVANT FOOTER --- */
+.cta-bachelier-section {
+    position: relative;
+    width: 100%;
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    
+    /* Configuration de l'image de fond */
+    background-image: url('/CTA.png'); 
+    background-size: cover;
+    background-position: center;
+    
+    /* ON SUPPRIME LE FIXED - L'image défile normalement */
+    background-attachment: scroll; 
+    background-repeat: no-repeat;
+    
+    overflow: hidden;
+}
+
+.cta-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Dégradé sombre pour garantir la lisibilité du texte */
+    background: linear-gradient(135deg, rgba(6, 47, 47, 0.77) 0%, rgba(0, 0, 0, 0.622) 100%);
+    z-index: 1;
+}
+
+.z-index-2 {
+    position: relative;
+    z-index: 2;
+}
+
+.text-success-light {
+    color: #4ade80;
+    font-weight: 800;
+}
+
+.btn-cta-final {
+    display: inline-flex;
+    align-items: center;
+    background-color: #198754;
+    color: white !important;
+    text-decoration: none;
+    padding: 18px 45px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border: none;
+}
+
+.btn-cta-final:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(25, 135, 84, 0.5);
+    background-color: #157347;
+}
+
+/* Adaptation Mobile */
+@media (max-width: 768px) {
+    .cta-bachelier-section {
+        min-height: 400px;
+    }
+    
+    .cta-bachelier-section h2 {
+        font-size: 1.7rem;
+    }
+
+    .btn-cta-final {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+
+
+/* --- DASHBOARD & LAYOUT --- */
+.simulateur-dashboard {
+    font-family: 'Inter', sans-serif;
+    color: var(--navbar-color);
+}
+
+.card-header-custom{
+    background: var(--navbar-color);
+}
+
+/* Custom Scrollbar pour la liste des notes */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 5px;
+}
+
+/* --- INPUTS & CARDS --- */
+.form-control-modern {
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 5px !important;
+    padding: 12px 15px !important;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    background-color: #f8fafc !important;
+}
+
+.input-pixel-perfect {
+    border: 1.5px solid #e2e8f0;
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: 800;
+    color: #198754;
+    text-align: center;
+    font-size: 1.1rem;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.note-input-card {
+    background: #fff;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #f1f5f9;
+    transition: transform 0.2s;
+}
+
+.note-input-card:hover {
+    border-color: #198754;
+}
+
+/* --- STATUS PILLS (ÉLIGIBILITÉ) --- */
+.status-pill {
+    padding: 6px 14px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.status-pill-sm {
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 800;
+}
+
+/* Couleurs des Statuts */
+.status-boursier { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+.status-demi { background: #fef9c3; color: #a16207; border: 1px solid #fef08a; }
+.status-payant { background: #dbeafe; color: #1d4ed8; border: 1px solid #bfdbfe; }
+.status-partiel { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+.status-faible { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+
+/* --- SCORE BADGE --- */
+.score-badge {
+    background: var(--navbar-color);
+    color: #fff;
+    font-weight: 800;
+    padding: 8px 10px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    min-width: 70px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.score-badge-sm {
+    background: #198754;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-weight: 800;
+    font-size: 1rem;
+}
+
+/* --- RECHERCHE --- */
+.search-input-modern {
+    padding-left: 45px !important;
+    height: 55px;
+    border-radius: 5px !important;
+    border: 1.5px solid #f1f5f9 !important;
+    font-weight: 500;
+}
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 768px) {
+    .simulateur-dashboard { padding-top: 10px; }
+    .progress-container { width: 100%; }
+    .result-card-mobile {
+        border-left: 5px solid #198754;
+        transition: transform 0.2s;
+    }
+    .result-card-mobile:active {
+        transform: scale(0.98);
+    }
+}
+
+
+/* --- TABLE OPTIMIZATION --- */
+
+.dashboard-table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* Force le contenu à rester sur une seule ligne */
+.dashboard-table th, 
+.dashboard-table td {
+    white-space: nowrap; 
+    padding: 10px 15px !important; /* Espacement réduit */
+}
+
+/* Taille réduite pour les badges de score dans le tableau */
+.score-badge-sm {
+    background: var(--navbar-color);
+    color: #fff;
+    font-weight: 800;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    display: inline-block;
+    min-width: 55px;
+}
+
+/* Style spécifique pour les en-têtes */
+.dashboard-table thead th {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    color: #64748b;
+    background-color: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* Taille de texte "Extra Small" pour les sous-titres */
+.x-small {
+    font-size: 0.75rem !important;
+}
+
+/* Limitation de la largeur de la colonne Nom si nécessaire */
+.dashboard-table td:first-child {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+
+
+
+
+
+/* --- SECTION VIDÉO PREMIUM --- */
+.video-presentation-section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    background: linear-gradient(180deg, #ffffff 0%, #f8faf9 100%);
+    position: relative;
+}
+
+.video-container-parent {
+    margin: 0 auto;
+    width: 85%; 
+    max-width: 1100px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; 
+    height: 0;
+    background: #000;
+    border-radius: 20px;
+    overflow: hidden;
+    /* Effet de reflet sur le dessus */
+    -webkit-mask-image: -webkit-radial-gradient(white, black); 
+    mask-image: radial-gradient(white, black);
+}
+
+.video-presentation-section h2 {
+    font-size: 2.2rem;
+    letter-spacing: -1px;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+}
+
+.video-presentation-section .text-muted {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* --- RÉGLAGE MOBILE --- */
+@media (max-width: 768px) {
+    .video-container-parent {
+        width: 100%; /* Contrôle ici la largeur mobile */
+        padding: 4px;
+        border-radius: 15px;
+    }
+
+    .video-wrapper {
+        border-radius: 10px;
+    }
+    
+    .video-presentation-section {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+
+    .video-presentation-section h2 {
+        font-size: 1.6rem;
+    }
+}
+
+/* --- OPTIMISATION PERFORMANCE --- */
+
+/* Si le mode réduit est activé par le script (connexion lente) */
+.reduce-motion .reveal {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+}
+
+/* Empêche le téléchargement de polices lourdes si non nécessaires sur mobile */
+@media (max-width: 768px) {
+    iframe {
+        aspect-ratio: 16 / 9;
+        height: auto !important; /* Évite les calculs de hauteur fixes lourds */
+    }
+}
+
+/* Optimisation du rendu matériel */
+.video-container-parent, .hero-img {
+    backface-visibility: hidden;
+    perspective: 1000px;
+    transform: translate3d(0,0,0); /* Force l'accélération GPU */
+}
