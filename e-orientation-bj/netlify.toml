@@ -1,0 +1,4 @@
+[build]
+  base    = "e-orientation-bj"
+  command = "npm run build"
+  publish = "e-orientation-bj/dist"
